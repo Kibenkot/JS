@@ -165,16 +165,16 @@
              <br>
           <div class="input-group mb-3">
            <label for="pass">Введите пароль :</label>
-           <input id="pass" name="pass" type="text" class="form-control" >
+           <input id="pass" name="pass" type="password" class="form-control" >
           </div>
           <div class="input-group mb-3">
            <label for="pass">Повторите пароль :</label>
-            <input id="repeat-pass" name="repeat-pass" type="text" class="form-control">
+            <input id="repeat-pass" name="repeat-pass" type="password" class="form-control">
           </div>
 
            <div class="form-inline">
               <div class="form-check form-check-inline ">
-                <input id="checkbox" type="checkbox" class="form-check-input">
+                <input id="checkbox" type="checkbox" class="form-check-input" >
                 <label class="form-check-label" > Согласен </label>
               </div>
       
@@ -188,9 +188,132 @@
             </div>
         </form>
 
+
+
+        <div class="modal">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+
+          <div class="modal-body">
+            <div class="name">As</div>
+            <div class="ageModal">12</div>
+            <div class="birthday">1232</div>
+            <div class="contactDetails">1233</div>
+            <div class="comunication">123</div>
+          </div>
+
+<!--  1. получить все елементы которые будут внутри мод окна
+  2 написать функцию ShowModal которя будет показывать или скрывать модальное окно
+  3 при правильном заполнении формы показывает заполненные данныеб при нажатии на крестик будет закрывать окно
+  4 после ShowModal заносим текст из инпутов в модальное окно
+
+
+
+
+
+           -->
+
+        </div>
     </section>
-    <section class="section" data-sectionId="113">
+    <section class="section form-group col-auto" data-sectionId="113">
         <h1>Test-Опрос</h1>
+
+
+        <div class="parent show form-group col-lg-6 bg-info rounded" id="group_1" data-wrapper="1">
+        <p class="question font-weight-bold">JavaScript это Java?</p>
+        
+        <div id="test_group">
+        <input type="radio" id="group_1_1" name="responses_1" value="yes">
+        <label for="group_1_1">Нет.</label>
+        <br>
+        <input type="radio" id="group_1_2" name="responses_1" value="no"> 
+        <label for="group_1_2">Да.</label>
+        <br>
+        <input type="radio" id="group_1_3" name="responses_1" value="no"> 
+        <label for="group_1_3">Возможно.</label>
+       </div>
+        
+        <button id="next_1" class="btn btn-warning">проверить</button>
+        
+        </div> 
+        
+        <div class="parent form-group col-lg-6 bg-info rounded" id="group_2" data-wrapper="2">
+          <p class="question font-weight-bold">Сколько параментров можно передать в фукнцию?</p>
+          <input type="radio" id="group_2_1" name="responses_2" value="yes"> 
+          <label for="group_2_1">Сколько указано при ее создании</label>
+          <br>
+          <input type="radio" id="group_2_2" name="responses_2" value="no"> 
+          <label for="group_2_2">Минимум один.</label>
+          <br>
+          <input type="radio" id="group_2_3" name="responses_2" value="no"> 
+          <label for="group_2_3">Сколько угодно.</label>
+          <br>
+          
+          <button id="next_2" class="btn btn-warning">проверить</button>
+          </div>
+          
+
+          <div class="parent form-group col-lg-6 bg-info rounded" id="group_3" data-wrapper="3">
+            <p class="question font-weight-bold"> Массивы это объекты?</p>
+            <input type="radio" id="group_3_1" name="responses_3" value="no"> 
+            <label for="group_3_1"> Не совсем.</label>
+            <br>
+            <input type="radio" id="group_3_2" name="responses_3" value="no"> 
+            <label for="group_3_2"> Нет.</label>
+            <br>
+            <input type="radio" id="group_3_3" name="responses_3" value="yes"> 
+            <label for="group_3_3"> Да, это спископодобные объекты.</label>
+            <br>
+            
+            <button id="next_3" class="btn btn-warning">проверить</button>
+            </div>
+         
+<!--         ---------------------------------------------------------------------------------  
+ -->
+ <!-- <br>
+ <br>
+<div class="box show" data-wrapper="1">1</div>
+<div class="box" data-wrapper="2">2</div>
+<div class="box" data-wrapper="3">3</div>
+
+<button class="next">Далее</button> -->
+
+<!--
+        1. получаем елементы (какие елементы нам нужны: 
+         - кнопка Далее
+         _ радио инпуты 
+         - родитель кнопок "group_1"
+         - массив-родителей вопросов всех wrapper *перебрать = show
+
+        2 прослушка событие клика *вешаем на родителя
+        3 function обработчик событий, нгчего не принимает. 
+        используя перебор массива радиокнопок определим какая из кнопок Checked
+        и если не одна из кнопок не checked сообщим пользователю что это оштбка
+
+        или нам нужно сделать кнопку disabled до того момета пока
+        один из инпутов не Checked
+
+        4 Получаем кнопку Checked в томже самом переборе и проверяем ее value
+        (if (element.value = "yes"))
+
+        5 создаем пустой массив для сбора ответов
+        перед переходом к следующему вопросу push туда ответ пользователю
+
+        6 для перехода на следующий вопрос использовать element.dataset.wrapper 
+        7 Взять element.dataset.wrapper и + 1 (делаем инкримент), чтобы перейти к следующему вопросу
+        инкриментируем до 3. В этот момент показываем результат. eсли element.dataset.wrapper =3, то показываем
+        массив с правильными ответами 
+        8 Показать результат - вывести некий блок сообщающий о том скоро правильных ответов дал человек с сообщением "Отлично" и т.д
+        
+Вспомогательные функции:
+1 Что хотябы 1н инпут выбран (блок, element)
+2. функ value выбранного input
+3. футк пагинации( скрыть предыдущую и показать следующую)
+Параметры: текущий блок и макс блок (wrapper)
+
+ -->
+
     </section>
     <section class="section" data-sectionId="141">
         <h1>Крестики-нолики</h1>
@@ -209,4 +332,6 @@
 <script src="./tabs.js"></script>
 <script src="./calculator.js"></script>
 <script src="./form.js"></script>
+<script src="./opros.js"></script>
+<script src="./test.js"></script>
 </html>

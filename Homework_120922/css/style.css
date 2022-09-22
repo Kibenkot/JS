@@ -31,4 +31,25 @@
 #multiplyButton,
 #clearButton {
     font-weight: 900;
+    font-size: 1.3rem;
     }
+
+    .box{
+        display: none;
+    }
+    .box.show{
+display: block;
+    }
+
+.parent.show {
+    display: block;
+}
+.parent {
+    display: none;
+}
+#next_1{
+    margin: 1rem;
+}
+.parent{
+    padding: 1rem;
+}

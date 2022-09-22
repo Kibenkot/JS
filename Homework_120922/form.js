@@ -59,10 +59,16 @@
     contactGroup.addEventListener('click', chooseContact);
 
     age.addEventListener('change', changeAge );
+    lastname.addEventListener('change', changeName);
+    firstName.addEventListener('change', changeName);
+    phone.addEventListener('change', changePhone);
+    email.addEventListener('change', changeEmail );
 
-
-
-
+    contactGroup.addEventListener('change', changeContactGroup);
+    mounth.addEventListener('change', changeDate);
+    day.addEventListener('change', changeDate);
+    pass.addEventListener('change', changePass);
+    repeatPass.addEventListener('change', changePass);
 
 
 
@@ -71,6 +77,8 @@
     function submitHandler(event) {    
          event.preventDefault();  // По умолчанию отключаем дефолтное событие
          if (formValided()) {
+            // showModal -(true):
+
         showMessage(checkbox, 'account created');
        } 
     }
@@ -101,10 +109,11 @@ function checkDate(element1, element2) { //проверка на пустоту 
    if( !checkEmpty(element1)){
     flag = false;
    }
-    if(!checkEmpty(element2)) {
+    if(!checkEmpty(element2)){
         flag = false;
     } 
         return flag;
+       
 }
 
 function checkName(element1, element2) { // проверка на пустоту имя и фамилию
@@ -157,14 +166,15 @@ function formValided() {
        let dateValid =checkDate(mounth, day);
        let checkboxValid =checkChecked(checkboxAgree);
        
-        let radioValid;
+        let radioValid = true;
 
         let radioActive = checkGroupisChecked(radioInputs, contactGroup); 
         console.log(radioActive);
-        if (radioActive && radioActive.value === "mail") {
+        // почему нужно &&
+        if ( radioActive.value === "mail") {
             radioValid = checkEmpty(mail);
         }
-        if (nameValid || ageValid || phoneValid || emailValid || passwordValid || dateValid || checkboxValid ||  radioValid ) {
+        if (nameValid && ageValid && phoneValid && emailValid && passwordValid && dateValid && checkboxValid &&  radioValid ) {
             return true;
         }
           
@@ -175,7 +185,29 @@ function changeAge(event) {
     checkAge(this);
 }
 
+function changeName(event) {
+    checkName(firstName, lastname);
+}
 
+function changePhone(event) { 
+    checkPhone(this);
+}
+
+function changeEmail(event) {
+    checkEmail(this);
+}
+
+// почему this не  работает
+function changeContactGroup(event) {
+    checkGroupisChecked(radioInputs, contactGroup);
+}
+
+function changeDate(event) {
+    checkDate(mounth, day);
+}
+function changePass(event) {
+    checkPassword(pass, repeatPass);
+}
 
 
 
@@ -247,15 +279,15 @@ function changeAge(event) {
     }
     }
 
-    function checkGroupisChecked(elements, parentElements) {
+    function checkGroupisChecked(elements, parentElement) {
             for (const element of elements) {
                 if (element.checked) {
-                    contactGroup.classList.remove('error');
+                    parentElement.classList.remove('error');
                     return element;
             }
         }
-        contactGroup.classList.add('error');
-        console.log(`error, child elements # ${parentElements.id} is not checked `);
+        parentElement.classList.add('error');
+        console.log(`error, child elements # ${parentElement.id} is not checked `);
     }
 
     function checkIncludes(element, simbol) {
@@ -280,7 +312,7 @@ function changeAge(event) {
 
    
     
-    function checkChecked(checkBox) {
+    function checkChecked(checkBox) { //функция проверки наличия галочки(Checked)
         if (checkBox.checked) {
             checkBox.classList.remove('error');
             return true;
@@ -289,8 +321,10 @@ function changeAge(event) {
         console.log(`Error, element # ${checkBox} is not checked`);
     }
     
-    function showMessage(checkBox, message) {
+    function showMessage(checkBox, message) { // Функция которая выводит сообщение тогда когда в checkBox checked
         if (checkBox.checked) {
        alert(message);          
         }
     }
+
+
