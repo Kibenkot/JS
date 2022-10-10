@@ -46,13 +46,16 @@ function isCube(a) {
  console.log(isCube(0));
 
 
- // 2 Вариант решения
+ // 2 Вариант решения // с корректировкой от преподователя
  function isCube1(a) {
 //  1 < x^3 < a
-   for(let x = 0; Math.pow(x,3)<= a; x++){
+   for(let x = 0; Math.pow(x,3)<= Math.abs(a); x++){
       if(Math.pow(x,3) === a){
            return true;
          }
+         if(-Math.pow(x,3) === a){
+            return true;
+          }
      }
       return false;
   }
